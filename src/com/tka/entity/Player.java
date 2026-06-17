@@ -7,8 +7,7 @@ public class Player {
 	private int age;
 	private String teamName;
 	private String role;
-	private  boolean captain;
-	private boolean overseas;
+
 	
 	
 	public Player() {
@@ -46,32 +45,19 @@ public class Player {
 	public void setRole(String role) {
 		this.role = role;
 	}
-	public boolean isCaptain() {
-		return captain;
-	}
-	public void setCaptain(boolean captain) {
-		this.captain = captain;
-	}
-	public boolean isOverseas() {
-		return overseas;
-	}
-	public void setOverseas(boolean overseas) {
-		this.overseas = overseas;
-	}
+
 	@Override
 	public String toString() {
-		return "Player [pid=" + pid + ", pname=" + pname + ", age=" + age + ", teamName=" + teamName + ", role=" + role
-				+ ", captain=" + captain + ", overseas=" + overseas + "]";
+		return "Player [pid=" + pid + ", pname=" + pname + ", age=" + age + ", teamName=" + teamName + ", role=" + role+  "]";
 	}
-	public Player(int pid, String pname, int age, String teamName, String role, boolean captain, boolean overseas) {
+	public Player(int pid, String pname, int age, String teamName, String role) {
 		super();
 		this.pid = pid;
 		this.pname = pname;
 		this.age = age;
 		this.teamName = teamName;
 		this.role = role;
-		this.captain = captain;
-		this.overseas = overseas;
+		
 	}
 	
 	

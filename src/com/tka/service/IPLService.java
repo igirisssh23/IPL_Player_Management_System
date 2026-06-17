@@ -35,4 +35,24 @@ public class IPLService {
 
 	}
 
+	public int insertPlayer(Player p1) {
+		ipldao = new IPLDao();
+		ipldao.insertPlayer(p1);
+
+		return 1;
+	}
+
+	public int updatePlayer(Player p1) {
+		ipldao = new IPLDao();
+		ipldao.updatePlayer(p1);
+
+		return 1;
+	}
+
+	public int deletePlayer(Player p1) {
+		ipldao = new IPLDao();
+		ipldao.deletePlayer(p1);
+		return 1;
+	}
+
 }

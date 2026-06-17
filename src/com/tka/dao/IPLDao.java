@@ -1,74 +1,133 @@
 package com.tka.dao;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.tka.entity.Player;
 
 public class IPLDao {
-	
-	private List<Player> ipl_db=null;     
+
+	private List<Player> ipl_db = null;
+	private String path = "com.mysql.cj.jdbc.Driver";
+	private Connection con = null;
+	private String url = "jdbc:mySql://localhost:3306/advjava_433_db";
+	private String un = "root";
+	private String pass = "Girish@2301";
+	PreparedStatement pst = null;
+	ResultSet rs = null;
+
+	String allplayerquery = "select * from player";
 
 	public List<Player> getAllPlayer() {
-		ipl_db=new ArrayList<>(); 
-		
+		ipl_db = new ArrayList<>();
 
-		// RCB
-		ipl_db.add(new Player(1,"Virat Kohli",37,"RCB","Batsman",false,false));
-		ipl_db.add(new Player(2,"Rajat Patidar",32,"RCB","Batsman",true,false));
-		ipl_db.add(new Player(3,"Phil Salt",29,"RCB","Wicket Keeper",false,true));
-		ipl_db.add(new Player(4,"Devdutt Padikkal",26,"RCB","Batsman",false,false));
-		ipl_db.add(new Player(5,"Jitesh Sharma",32,"RCB","Wicket Keeper",false,false));
-		ipl_db.add(new Player(6,"Tim David",30,"RCB","All Rounder",false,true));
-		ipl_db.add(new Player(7,"Krunal Pandya",35,"RCB","All Rounder",false,false));
-		ipl_db.add(new Player(8,"Bhuvneshwar Kumar",36,"RCB","Bowler",false,false));
-		ipl_db.add(new Player(9,"Josh Hazlewood",35,"RCB","Bowler",false,true));
-		ipl_db.add(new Player(10,"Yash Dayal",28,"RCB","Bowler",false,false));
-		ipl_db.add(new Player(11,"Suyash Sharma",22,"RCB","Bowler",false,false));
+		try {
+			Class.forName(path);
 
-		// GT
-		ipl_db.add(new Player(12,"Shubman Gill",26,"GT","Batsman",true,false));
-		ipl_db.add(new Player(13,"Sai Sudharsan",24,"GT","Batsman",false,false));
-		ipl_db.add(new Player(14,"Jos Buttler",35,"GT","Wicket Keeper",false,true));
-		ipl_db.add(new Player(15,"Glenn Phillips",29,"GT","All Rounder",false,true));
-		ipl_db.add(new Player(16,"Rahul Tewatia",32,"GT","All Rounder",false,false));
-		ipl_db.add(new Player(17,"Washington Sundar",26,"GT","All Rounder",false,false));
-		ipl_db.add(new Player(18,"Rashid Khan",27,"GT","Bowler",false,true));
-		ipl_db.add(new Player(19,"Mohammed Siraj",31,"GT","Bowler",false,false));
-		ipl_db.add(new Player(20,"Prasidh Krishna",30,"GT","Bowler",false,false));
-		ipl_db.add(new Player(21,"Sai Kishore",29,"GT","Bowler",false,false));
-		ipl_db.add(new Player(22,"Kagiso Rabada",31,"GT","Bowler",false,true));
+			con = DriverManager.getConnection(url, un, pass);
+			pst = con.prepareStatement(allplayerquery);
 
-		// SRH
-		ipl_db.add(new Player(23,"Pat Cummins",33,"SRH","Bowler",true,true));
-		ipl_db.add(new Player(24,"Abhishek Sharma",25,"SRH","All Rounder",false,false));
-		ipl_db.add(new Player(25,"Travis Head",32,"SRH","Batsman",false,true));
-		ipl_db.add(new Player(26,"Heinrich Klaasen",34,"SRH","Wicket Keeper",false,true));
-		ipl_db.add(new Player(27,"Ishan Kishan",27,"SRH","Wicket Keeper",false,false));
-		ipl_db.add(new Player(28,"Nitish Kumar Reddy",23,"SRH","All Rounder",false,false));
-		ipl_db.add(new Player(29,"Kamindu Mendis",27,"SRH","All Rounder",false,true));
-		ipl_db.add(new Player(30,"Harshal Patel",35,"SRH","Bowler",false,false));
-		ipl_db.add(new Player(31,"Jaydev Unadkat",34,"SRH","Bowler",false,false));
-		ipl_db.add(new Player(32,"Brydon Carse",30,"SRH","Bowler",false,true));
-		ipl_db.add(new Player(33,"Harsh Dubey",22,"SRH","Bowler",false,false));
+			rs = pst.executeQuery();
+			ipl_db = new ArrayList<Player>();
+			while (rs.next()) {
+				int id = rs.getInt(1);
+				String nm = rs.getString(2);
+				int age = rs.getInt(3);
+				String tn = rs.getString(4);
+				String rl = rs.getString(5);
 
-		// RR
-		ipl_db.add(new Player(34,"Riyan Parag",24,"RR","All Rounder",true,false));
-		ipl_db.add(new Player(35,"Yashasvi Jaiswal",24,"RR","Batsman",false,false));
-		ipl_db.add(new Player(36,"Dhruv Jurel",25,"RR","Wicket Keeper",false,false));
-		ipl_db.add(new Player(37,"Shimron Hetmyer",29,"RR","Batsman",false,true));
-		ipl_db.add(new Player(38,"Vaibhav Suryavanshi",15,"RR","Batsman",false,false));
-		ipl_db.add(new Player(39,"Ravindra Jadeja",37,"RR","All Rounder",false,false));
-		ipl_db.add(new Player(40,"Jofra Archer",31,"RR","Bowler",false,true));
-		ipl_db.add(new Player(41,"Tushar Deshpande",31,"RR","Bowler",false,false));
-		ipl_db.add(new Player(42,"Ravi Bishnoi",25,"RR","Bowler",false,false));
-		ipl_db.add(new Player(43,"Sandeep Sharma",33,"RR","Bowler",false,false));
-		ipl_db.add(new Player(44,"Nandre Burger",30,"RR","Bowler",false,true));
-		
-		
+				Player obj = new Player(id, nm, age, tn, rl);
+
+				ipl_db.add(obj);
+			}
+
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
 		return ipl_db;
 
 	}
 
+	public void insertPlayer(Player p1) {
+
+		String insertQuery = "insert into player values(?,?,?,?,?)";
+
+		try {
+			Class.forName(path);
+
+			con = DriverManager.getConnection(url, un, pass);
+
+			pst = con.prepareStatement(insertQuery);
+
+			pst.setInt(1, p1.getPid());
+			pst.setString(2, p1.getPname());
+			pst.setInt(3, p1.getAge());
+			pst.setString(4, p1.getTeamName());
+			pst.setString(5, p1.getRole());
+
+			pst.executeUpdate();
+
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public int updatePlayer(Player p1) {
+		String updateQuery = "update player set pname=?, age=?, teamName=?, role=? where pid=?";
+		int rows = 0;
+
+		try {
+			Class.forName(path);
+
+			con = DriverManager.getConnection(url, un, pass);
+
+			pst = con.prepareStatement(updateQuery);
+
+			pst.setString(1, p1.getPname());
+			pst.setInt(2, p1.getAge());
+			pst.setString(3, p1.getTeamName());
+			pst.setString(4, p1.getRole());
+			pst.setInt(5, p1.getPid());
+
+			rows = pst.executeUpdate();
+
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return rows;
+	}
+
+	public int deletePlayer(Player p1) {
+		String deletequery = "delete  from player where pid=?";
+		int rows = 0;
+
+		try {
+			Class.forName(path);
+
+			con = DriverManager.getConnection(url, un, pass);
+
+			pst = con.prepareStatement(deletequery);
+			pst.setInt(1, p1.getPid());
+
+			rows = pst.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return rows;
+
+	}
 }
