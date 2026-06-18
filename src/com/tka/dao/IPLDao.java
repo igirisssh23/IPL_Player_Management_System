@@ -17,7 +17,7 @@ public class IPLDao {
 	private Connection con = null;
 	private String url = "jdbc:mySql://localhost:3306/advjava_433_db";
 	private String un = "root";
-	private String pass = "Girish@2301";
+	private String pass = "";
 	PreparedStatement pst = null;
 	ResultSet rs = null;
 
