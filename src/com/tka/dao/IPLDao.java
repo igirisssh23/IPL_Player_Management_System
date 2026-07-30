@@ -15,7 +15,7 @@ public class IPLDao {
 	private List<Player> ipl_db = null;
 	private String path = "com.mysql.cj.jdbc.Driver";
 	private Connection con = null;
-	private String url = "jdbc:mySql://localhost:3306/advjava_433_db";
+	private String url = "jdbc:mySql://localhost:3306/IPL_Project_DB?createDatabaseIfNotExist=true";
 	private String un = "root";
 	private String pass = "Girish@2301";
 	PreparedStatement pst = null;

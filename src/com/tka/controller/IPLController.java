@@ -1,63 +1,97 @@
 package com.tka.controller;
 
 import java.util.List;
+import java.util.Scanner;
 
 import com.tka.entity.Player;
 import com.tka.service.IPLService;
 
 public class IPLController {
-	public static void main(String[] args) {
+	private Scanner sc = new Scanner(System.in);
+	private IPLService iplservice = null;
+	private Player player = null;
 
-		IPLService iplservice = new IPLService();
+	public Player addPlayer() {
+		iplservice = new IPLService();
+		player = new Player();
 
-		List<Player> allPlayers = iplservice.getAllPlayers();
+		System.out.println("Enter player's id:");
+		player.setPid(sc.nextInt());
 
-		// allPlayers.forEach(p -> System.out.println(p.getPname()));
-		allPlayers.forEach(p -> System.out.println("Player:-" + p.getPname() + " TeamName:-" + p.getTeamName()));
+		System.out.println("Enter player's name:");
+		player.setPname(sc.next());
 
-		// List<Player> allPlayersByTeam= iplservice.getPlayersByTeam("RCB");
-		// allPlayersByTeam.forEach(p -> System.out.println("Player: " + p.getPname() +"
-		// Team: " + p.getTeamName()));
+		System.out.println("Enter player's age:");
+		player.setAge(sc.nextInt());
 
-		// List<Player> allPlayersByTeam1= iplservice.getPlayersByTeam("GT");
-		// allPlayersByTeam1.forEach(p -> System.out.println("Player: " + p.getPname()
-		// +" Team: " + p.getTeamName()));
+		System.out.println("Enter player's team name:");
+		player.setTeamName(sc.next());
 
-		// List<Player> allPlayersByTeam11= iplservice.getPlayersByTeam("SRH");
-		// allPlayersByTeam11.forEach(p -> System.out.println("Player: " + p.getPname()
-		// +" Team: " + p.getTeamName()));
+		System.out.println("Enter player's role:");
+		player.setRole(sc.next());
 
-		// List<Player> allPlayersByTeam111= iplservice.getPlayersByTeam("RR");
-		// allPlayersByTeam111.forEach(p -> System.out.println("Player: " + p.getPname()
-		// +" Team: " + p.getTeamName()));
+		iplservice.insertPlayer(player);
+		return player;
+	}
 
-		// ------------Insert Players
+	public List<Player> allPlayer() {
+		iplservice = new IPLService();
 
-		// Player p1= new Player(45,"David Malan",60,"RCB","WicketKeeper");
-		// int ack=iplservice.insertPlayer(p1);
-		// Player p2= new Player(46,"Jonty Rhodes",60,"RCB","WicketKeeper");
-		// int ack1=iplservice.insertPlayer(p2);
-		// Player p21= new Player(47,"David Beckham",650,"SRH","Bowler");
-		// int ack2=iplservice.insertPlayer(p21);
-		// Player p211= new Player(48,"Nucleya",750,"GT","Bowler");
-		// int ack3=iplservice.insertPlayer(p211);
+		List<Player> allPlayer = iplservice.getAllPlayers();
 
-		// -----------Update Players
+		for (Player p : allPlayer) {
+			System.out.println(p);
+		}
 
-		// Player p1= new Player(1,"David Malan",600,"RCB","Bowler");
-		// int ack2=iplservice.updatePlayer(p1);
-		// System.out.println(ack2>0 ? "Success":"fail");
-		// Player p2= new Player(35,"David ",60,"RR","WK");
-		// int ack3=iplservice.updatePlayer(p2);
-		// System.out.println(ack3>0 ? "Success":"fail");
+		return allPlayer;
+	}
 
-		// -----------------Delete players
-		// Player p1=new Player(48,"Nucleya",750,"GT","Bowler");
-		// int ack3=iplservice.deletePlayer(p1);
-		// System.out.println(ack3>0 ? "Success":"fail");
-		// Player p2=new Player(35,"Nucleya",750,"GT","Bowler");
-		// int ack3=iplservice.deletePlayer(p2);
-		// System.out.println(ack3>0 ? "Success":"fail");
+	public List<Player> playerByTeam() {
+		iplservice = new IPLService();
+
+		System.out.println("Enter your team name:");
+		String teamName = sc.next();
+
+		List<Player> playerByTeam = iplservice.getPlayersByTeam(teamName);
+		playerByTeam.forEach(p -> System.out.println(p));
+
+		return playerByTeam;
+	}
+
+	public Player updatePlayer() {
+		iplservice = new IPLService();
+		player = new Player();
+
+		System.out.println("Enter player's id:");
+		player.setPid(sc.nextInt());
+
+		System.out.println("Enter player's name:");
+		player.setPname(sc.next());
+
+		System.out.println("Enter player's age:");
+		player.setAge(sc.nextInt());
+
+		System.out.println("Enter player's team name:");
+		player.setTeamName(sc.next());
+
+		System.out.println("Enter player's role:");
+		player.setRole(sc.next());
+
+		iplservice.updatePlayer(player);
+
+		return player;
+	}
+
+	public Player deletePlayer() {
+		iplservice = new IPLService();
+		player = new Player();
+
+		System.out.println("Enter player ID you want to delete");
+		player.setPid(sc.nextInt());
+
+		iplservice.deletePlayer(player);
+
+		return player;
 
 	}
 

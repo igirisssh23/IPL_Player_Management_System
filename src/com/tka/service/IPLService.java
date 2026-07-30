@@ -19,7 +19,7 @@ public class IPLService {
 		return ipl_db;
 	}
 
-	public List<Player> getPlayersByTeam(String string) {
+	public List<Player> getPlayersByTeam(String teamName) {
 		ipldao = new IPLDao();
 		List<Player> allPlayers = ipldao.getAllPlayer();
 
@@ -27,7 +27,7 @@ public class IPLService {
 
 		for (Player player : allPlayers) {
 
-			if (player.getTeamName().equalsIgnoreCase(string)) {
+			if (player.getTeamName().equalsIgnoreCase(teamName)) {
 				result.add(player);
 			}
 		}
@@ -35,24 +35,24 @@ public class IPLService {
 
 	}
 
-	public int insertPlayer(Player p1) {
+	public Player insertPlayer(Player p1) {
 		ipldao = new IPLDao();
 		ipldao.insertPlayer(p1);
 
-		return 1;
+		return p1;
 	}
 
-	public int updatePlayer(Player p1) {
+	public Player updatePlayer(Player p1) {
 		ipldao = new IPLDao();
 		ipldao.updatePlayer(p1);
 
-		return 1;
+		return p1;
 	}
 
-	public int deletePlayer(Player p1) {
+	public Player deletePlayer(Player p1) {
 		ipldao = new IPLDao();
 		ipldao.deletePlayer(p1);
-		return 1;
+		return p1;
 	}
 
 }
