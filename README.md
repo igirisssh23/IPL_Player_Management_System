@@ -90,7 +90,7 @@ IPL PLAYER MANAGEMENT SYSTEM
 1. Clone the repository
 
 ```bash
-[git clone https://github.com/igirisssh23/IPL_Project_JDBC.git](https://github.com/igirisssh23/IPL_Player_Management_System.git)
+https://github.com/igirisssh23/IPL_Player_Management_System.git
 ```
 
 2. Open the project in Eclipse.
