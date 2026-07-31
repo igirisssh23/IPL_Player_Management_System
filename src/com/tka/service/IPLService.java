@@ -10,13 +10,12 @@ public class IPLService {
 
 	private List<Player> ipl_db = null;
 	private IPLDao ipldao = null;
-	private int rows=0;
+	private int rows = 0;
 
 	public List<Player> getAllPlayers() {
 
 		ipldao = new IPLDao();
 		ipl_db = ipldao.getAllPlayer();
-		
 
 		return ipl_db;
 	}
@@ -39,8 +38,8 @@ public class IPLService {
 
 	public String insertPlayer(Player player) {
 		ipldao = new IPLDao();
-		rows=ipldao.insertPlayer(player);
-		if(rows>0) {
+		rows = ipldao.insertPlayer(player);
+		if (rows > 0) {
 			return "Player Inserted Successfully";
 		}
 		return "Insertion failed";
@@ -50,7 +49,7 @@ public class IPLService {
 		ipldao = new IPLDao();
 		ipldao.updatePlayer(player);
 
-		if(rows>0) {
+		if (rows > 0) {
 			return "Player Updation Successfully";
 		}
 		return "Updation failed";
@@ -59,9 +58,10 @@ public class IPLService {
 	public String deletePlayer(Player player) {
 		ipldao = new IPLDao();
 		ipldao.deletePlayer(player);
-		if(rows>0) {
+		if (rows > 0) {
 			return "Player Deletion Successfully";
 		}
-		return "Deletion failed";	}
+		return "Deletion failed";
+	}
 
 }

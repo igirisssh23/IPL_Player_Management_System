@@ -94,8 +94,9 @@ public class IPLController {
 		return player;
 
 	}
+
 	public void scannerClose() {
-	sc.close();
+		sc.close();
 	}
-	
+
 }
