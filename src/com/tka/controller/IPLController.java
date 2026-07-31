@@ -7,7 +7,7 @@ import com.tka.entity.Player;
 import com.tka.service.IPLService;
 
 public class IPLController {
-	private Scanner sc = new Scanner(System.in);
+	private Scanner sc;
 	private IPLService iplservice = null;
 	private Player player = null;
 
@@ -94,5 +94,8 @@ public class IPLController {
 		return player;
 
 	}
-
+	public void scannerClose() {
+	sc.close();
+	}
+	
 }

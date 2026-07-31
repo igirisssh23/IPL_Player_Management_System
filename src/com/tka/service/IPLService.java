@@ -10,11 +10,13 @@ public class IPLService {
 
 	private List<Player> ipl_db = null;
 	private IPLDao ipldao = null;
+	private int rows=0;
 
 	public List<Player> getAllPlayers() {
 
 		ipldao = new IPLDao();
 		ipl_db = ipldao.getAllPlayer();
+		
 
 		return ipl_db;
 	}
@@ -35,24 +37,31 @@ public class IPLService {
 
 	}
 
-	public Player insertPlayer(Player p1) {
+	public String insertPlayer(Player player) {
 		ipldao = new IPLDao();
-		ipldao.insertPlayer(p1);
-
-		return p1;
+		rows=ipldao.insertPlayer(player);
+		if(rows>0) {
+			return "Player Inserted Successfully";
+		}
+		return "Insertion failed";
 	}
 
-	public Player updatePlayer(Player p1) {
+	public String updatePlayer(Player player) {
 		ipldao = new IPLDao();
-		ipldao.updatePlayer(p1);
+		ipldao.updatePlayer(player);
 
-		return p1;
+		if(rows>0) {
+			return "Player Updation Successfully";
+		}
+		return "Updation failed";
 	}
 
-	public Player deletePlayer(Player p1) {
+	public String deletePlayer(Player player) {
 		ipldao = new IPLDao();
-		ipldao.deletePlayer(p1);
-		return p1;
-	}
+		ipldao.deletePlayer(player);
+		if(rows>0) {
+			return "Player Deletion Successfully";
+		}
+		return "Deletion failed";	}
 
 }

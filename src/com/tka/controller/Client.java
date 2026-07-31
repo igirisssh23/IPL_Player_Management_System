@@ -50,6 +50,7 @@ public class Client {
 			
 		case 6:
 			System.out.println("Thank you for using");
+			iplcontroller.scannerClose();
 			System.exit(0);
 			break;
 			
